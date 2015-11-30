@@ -39,15 +39,12 @@ public class JSONreader {
         try{
             JSONObject jsonOBJ = new JSONObject(jsonSTR);
             JSONArray jsonArr = jsonOBJ.getJSONArray("tournaments");
-
             if(jsonArr.length() >= index){
                 return jsonArr.getJSONObject(index);
             }
-
         }catch (JSONException e){
             e.printStackTrace();
         }
-
         return null;
     }
 
@@ -55,13 +52,49 @@ public class JSONreader {
         try{
             JSONObject jsonOBJ = new JSONObject(jsonSTR);
             JSONArray jsonArr = jsonOBJ.getJSONArray("tournaments");
-
             for(int i=0; i<jsonArr.length(); i++){
                 if(jsonArr.getJSONObject(i).getString("name").equals(name)){
                     return jsonArr.getJSONObject(i);
                 }
             }
+        }catch(JSONException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
 
+    public static JSONObject getPlayerAtIndex(String jsonSTR, String tournamentName, int index){
+        try{
+            JSONObject jsonOBJ = new JSONObject(jsonSTR);
+            JSONArray tourneyArr = jsonOBJ.getJSONArray("tournaments");
+            for(int i=0; i<tourneyArr.length(); i++){
+                if(tourneyArr.getJSONObject(i).getString("name").equals(tournamentName)){
+                    JSONArray playerArr = tourneyArr.getJSONObject(i).getJSONArray("players");
+                    if(playerArr.length() >= index){
+                        return playerArr.getJSONObject(index);
+                    }
+                }
+            }
+        }catch(JSONException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static JSONObject getPlayerByName(String jsonSTR, String tournamentName, String name){
+        try{
+            JSONObject jsonOBJ = new JSONObject(jsonSTR);
+            JSONArray tourneyArr = jsonOBJ.getJSONArray("tournaments");
+            for(int i=0; i<tourneyArr.length(); i++){
+                if(tourneyArr.getJSONObject(i).getString("name").equals(name)){
+                    JSONArray playerArr = tourneyArr.getJSONObject(i).getJSONArray("players");
+                    for(int y=0; i<playerArr.length(); y++){
+                        if(playerArr.getJSONObject(i).getString("name").equals(name)){
+                            return playerArr.getJSONObject(i);
+                        }
+                    }
+                }
+            }
         }catch(JSONException e){
             e.printStackTrace();
         }

@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -18,7 +20,8 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TournamentMain extends AppCompatActivity {
+public class TournamentMain extends AppCompatActivity implements AdapterView.OnItemClickListener
+{
 
     String tournamentName;
     TextView tourneyNameLabel;
@@ -97,6 +100,20 @@ public class TournamentMain extends AppCompatActivity {
 
         MySimpleArrayAdapter arrayAdapter = new MySimpleArrayAdapter(getApplicationContext(), names, teams, rankings);
         listView.setAdapter(arrayAdapter);
+        listView.setOnItemClickListener(this);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+        Intent intent = new Intent(TournamentMain.this,PlayerInfo.class);
+        intent.putExtra("Tournament Name", tournamentName);
+        intent.putExtra("Player Name", players.get(position).getName());
+        intent.putExtra("Player Ranking", players.get(position).getRanking());
+        intent.putExtra("Player Games", players.get(position).getGamesPlayed());
+        intent.putExtra("Player Wins", players.get(position).getGamesWon());
+        this.startActivity(intent);
+
     }
 
 }
