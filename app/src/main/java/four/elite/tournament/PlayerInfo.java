@@ -43,6 +43,10 @@ public class PlayerInfo extends AppCompatActivity {
 
         //fill textviews with values
         playerNameLabel.setText(bundle.getString("Player Name"));
+        teamNameLabel.setText(bundle.getString("Player Team"));
+        rankLabel.append(Integer.toString(bundle.getInt("Player Ranking")));
+        gamesPlayedLabel.append(Integer.toString(bundle.getInt("Player Games")));
+        gamesWonLabel.append(Integer.toString(bundle.getInt("Player Wins")));
 
 
     }

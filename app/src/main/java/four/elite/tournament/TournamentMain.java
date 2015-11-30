@@ -73,7 +73,7 @@ public class TournamentMain extends AppCompatActivity implements AdapterView.OnI
                 player.setName(playersARR.getJSONObject(i).getString("name"));
                 player.setTeamName(playersARR.getJSONObject(i).getString("team"));
                 player.setRanking(Integer.parseInt(playersARR.getJSONObject(i).getString("rank")));
-                player.setGamesPlayed(Integer.parseInt(playersARR.getJSONObject(i).getString("wins")));
+                player.setGamesWon(Integer.parseInt(playersARR.getJSONObject(i).getString("wins")));
                 player.setGamesPlayed(Integer.parseInt(playersARR.getJSONObject(i).getString("games")));
                 players.add(player);
             }
@@ -109,6 +109,7 @@ public class TournamentMain extends AppCompatActivity implements AdapterView.OnI
         Intent intent = new Intent(TournamentMain.this,PlayerInfo.class);
         intent.putExtra("Tournament Name", tournamentName);
         intent.putExtra("Player Name", players.get(position).getName());
+        intent.putExtra("Player Team", players.get(position).getTeamName());
         intent.putExtra("Player Ranking", players.get(position).getRanking());
         intent.putExtra("Player Games", players.get(position).getGamesPlayed());
         intent.putExtra("Player Wins", players.get(position).getGamesWon());

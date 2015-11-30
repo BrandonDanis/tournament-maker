@@ -14,41 +14,33 @@
           "team": "Barcelona",
           "rank": "2",
           "games": "10",
-          "wins": "9"
+          "wins": "5"
         },{
           "name": "Finn",
           "team": "China",
           "rank": "3",
           "games": "10",
-          "wins": "9"
+          "wins": "6"
         }
-      ]
-    },
-
-    {
-      "name": "Champions League",
-      "players": [
+      ],
+      "games": [
         {
-          "name": "Brandon",
-          "team": "Chelsea",
-          "rank": "1",
-          "games": "10",
-          "wins": "9"
+          "home_team": "Brandon Danis",
+          "away_team": "Youssef",
+          "home_score": "3",
+          "away_score": "2"
         },{
-          "name": "Youssef",
-          "team": "Man U",
-          "rank": "2",
-          "games": "10",
-          "wins": "9"
+          "home_team": "Youssef",
+          "away_team": "Finn",
+          "home_score": "1",
+          "away_score": "4"
         },{
-          "name": "Finn",
-          "team": "China",
-          "rank": "3",
-          "games": "10",
-          "wins": "9"
+          "home_team": "Finn",
+          "away_team": "Brandon Danis",
+          "home_score": "6",
+          "away_score": "2"
         }
       ]
     }
-
   ]
 }
