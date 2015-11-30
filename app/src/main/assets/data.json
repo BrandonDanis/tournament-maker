@@ -1,0 +1,54 @@
+{
+  "tournaments":[
+    {
+      "name": "La Liga",
+      "players": [
+        {
+          "name": "Brandon",
+          "team": "Real Madrid",
+          "rank": "1",
+          "games": "10",
+          "wins": "9"
+        },{
+          "name": "Youssef",
+          "team": "Barcelona",
+          "rank": "2",
+          "games": "10",
+          "wins": "9"
+        },{
+          "name": "Finn",
+          "team": "China",
+          "rank": "3",
+          "games": "10",
+          "wins": "9"
+        }
+      ]
+    },
+
+    {
+      "name": "Champions League",
+      "players": [
+        {
+          "name": "Brandon",
+          "team": "Chelsea",
+          "rank": "1",
+          "games": "10",
+          "wins": "9"
+        },{
+          "name": "Youssef",
+          "team": "Man U",
+          "rank": "2",
+          "games": "10",
+          "wins": "9"
+        },{
+          "name": "Finn",
+          "team": "China",
+          "rank": "3",
+          "games": "10",
+          "wins": "9"
+        }
+      ]
+    }
+
+  ]
+}
