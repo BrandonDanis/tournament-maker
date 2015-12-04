@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             players.add(player);
         }
 
-        Tournament tourney = new Tournament(name,players);
+        Tournament tourney = new Tournament("Tourney 1", players,"Round Robin");
 
         tournaments.add(tourney);
     }
