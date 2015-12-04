@@ -43,6 +43,7 @@
             android:layout_height="wrap_content"
             android:text="New Tournament"
             android:id="@+id/button2"
+            android:onClick="getTourney"
             android:layout_gravity="center_horizontal" />
 
         <TableRow

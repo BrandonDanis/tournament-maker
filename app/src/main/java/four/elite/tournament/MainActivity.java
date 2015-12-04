@@ -1,5 +1,6 @@
 package four.elite.tournament;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,101 +13,86 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.MemoryHandler;
 
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
-    String jsonSTR = null;
+
+    private List<Tournament> tournaments = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initPage();
-    }
 
-    public void initPage(){
-        JSONObject jsonOBJ;
-        try{
-            BufferedReader br = new BufferedReader(new InputStreamReader(getAssets().open("data.json")));
-            jsonSTR = JSONreader.getJSONstring(br);
-        }catch (IOException e){
-            System.out.print("Fail");
-        }
+        this.tournaments = DataManager.getTournaments(getApplicationContext());
 
-        try{
-            jsonOBJ = new JSONObject(jsonSTR);
-            JSONArray jsonArr = jsonOBJ.getJSONArray("tournaments");
-            if(jsonArr.length() != 0){
-                populateListView(jsonArr);
-            }else{
-                System.out.println("No current tournament!");
-            }
-
-        }catch (JSONException e) {
-            e.printStackTrace();
-        }
+//        setupTournaments();
+        populateListView();
 
     }
 
-    private void populateListView(JSONArray jsonArray){
+    //DEBUGGING METHOD!
+    public void setupTournaments(){
+        addTourney("Tournament 1");
+        addTourney("Tournament 2");
+        addTourney("Tournament 3");
+        addTourney("Tournament 4");
+        DataManager.saveTournaments(getApplicationContext(), tournaments);
+    }
 
+    //DEBUGGING METHOD!
+    public void addTourney(String name){
+        List<Player> players = new ArrayList<Player>();
+
+        for(int i=0; i<4; i++){
+            Player player = new Player("Team" + i,"Player" + i);
+            players.add(player);
+        }
+
+        Tournament tourney = new Tournament(name,players);
+
+        tournaments.add(tourney);
+    }
+
+    //DEBUGGING METHOD!
+    public void getTourney(View v){
+        List<Tournament> list = DataManager.getTournaments(getApplicationContext());
+        System.out.println(list);
+    }
+
+    private void populateListView(){
         ListView listView = (ListView)findViewById(R.id.listView);
-
-        try{
-
-            List<String> values = new ArrayList<String>();
-
-            for(int i=0; i < jsonArray.length(); i++){
-                JSONObject item = jsonArray.getJSONObject(i);
-                values.add(item.getString("name"));
-            }
-
-            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
-                this, android.R.layout.simple_list_item_1, values
-            );
-
-            listView.setAdapter(arrayAdapter);
-            listView.setOnItemClickListener(this);
-
-        }catch (JSONException e) {
-            e.printStackTrace();
-            System.out.println("Fail");
+        List<String> tournamentNames = new ArrayList<String>();
+        for(int i=0; i < tournaments.size(); i++){
+            Tournament tournament = tournaments.get(i);
+            System.out.println(tournament.getName());
+            tournamentNames.add(tournament.getName());
         }
-
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
+                this, android.R.layout.simple_list_item_1, tournamentNames
+        );
+        listView.setAdapter(arrayAdapter);
+        listView.setOnItemClickListener(this);
     }
-
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-        JSONObject tournament = null;
-        String teamName = null;
-
-        try{
-            BufferedReader br = new BufferedReader(new InputStreamReader(getAssets().open("data.json")));
-            jsonSTR = JSONreader.getJSONstring(br);
-            tournament = JSONreader.getTournamentAtIndex(jsonSTR,position);
-        }catch (IOException e){
-            System.out.print("Fail");
-        }
-
-        try {
-            teamName = tournament.getString("name");
-        }catch (JSONException e) {
-            e.printStackTrace();
-        }
-
+        System.out.println("Populating!");
         Intent intent = new Intent(MainActivity.this,TournamentMain.class);
-        intent.putExtra("Tournament Name", teamName);
+        intent.putExtra("Tournament Name", tournaments.get(position).getName());
         this.startActivity(intent);
-
     }
 
 
