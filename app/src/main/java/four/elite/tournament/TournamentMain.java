@@ -8,16 +8,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
-
 public class TournamentMain extends AppCompatActivity implements AdapterView.OnItemClickListener
 {
     public static Tournament tournament;
@@ -57,6 +47,7 @@ public class TournamentMain extends AppCompatActivity implements AdapterView.OnI
         MySimpleArrayAdapter arrayAdapter = new MySimpleArrayAdapter(getApplicationContext(), names, teams, rankings);
         listView.setAdapter(arrayAdapter);
         listView.setOnItemClickListener(this);
+
     }
 
     @Override

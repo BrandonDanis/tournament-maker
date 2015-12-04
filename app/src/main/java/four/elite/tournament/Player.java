@@ -61,6 +61,7 @@ public class Player {
     {
         return otherPlayers.get(index);
     }
+
     public boolean alreadyPlayed (Player other)
     {
         for(int i = 0; i < otherPlayers.size(); i++)

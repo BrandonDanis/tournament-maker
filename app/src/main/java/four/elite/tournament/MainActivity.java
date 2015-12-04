@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import android.widget.ArrayAdapter;
 
+import junit.framework.Test;
+
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
 
@@ -48,5 +50,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         this.startActivity(intent);
     }
 
+    public void initNewTourneySetup(View v){
+        Intent intent = new Intent(MainActivity.this,MainCreate.class);
+        this.startActivity(intent);
+    }
 
 }

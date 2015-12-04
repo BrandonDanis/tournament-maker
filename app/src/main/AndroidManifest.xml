@@ -19,6 +19,10 @@
         </activity>
         <activity android:name=".PlayerInfo" >
         </activity>
+        <activity android:name=".MainCreate" >
+        </activity>
+        <activity android:name=".PlayerCreation" >
+        </activity>
     </application>
 
 </manifest>

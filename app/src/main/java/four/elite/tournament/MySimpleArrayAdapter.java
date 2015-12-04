@@ -34,14 +34,15 @@ public class MySimpleArrayAdapter extends ArrayAdapter{
 
         TextView nameLabel = (TextView)rowView.findViewById(R.id.firstLine);
         TextView teamNameLabel = (TextView)rowView.findViewById(R.id.description);
-        TextView rannkingLabel = (TextView)rowView.findViewById(R.id.rankingLabel);
+        TextView rankingLabel = (TextView)rowView.findViewById(R.id.rankingLabel);
         ImageView imageView = (ImageView)rowView.findViewById(R.id.icon);
 
         nameLabel.setText(names[position]);
         teamNameLabel.setText(teams[position]);
-        rannkingLabel.setText("Rank: " + Integer.toString(rankings[position]));
+        rankingLabel.setText("Rank: " + Integer.toString(rankings[position]));
 
         return rowView;
+
     }
 
 
