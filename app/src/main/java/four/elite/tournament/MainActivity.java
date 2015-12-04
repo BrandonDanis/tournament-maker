@@ -22,38 +22,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         setContentView(R.layout.activity_main);
 
         this.tournaments = DataManager.getTournaments(getApplicationContext());
-        
+
         populateListView();
 
-    }
-
-    //DEBUGGING METHOD!
-    public void setupTournaments(){
-        addTourney("Tournament 1");
-        addTourney("Tournament 2");
-        addTourney("Tournament 3");
-        addTourney("Tournament 4");
-        DataManager.saveTournaments(getApplicationContext(), tournaments);
-    }
-
-    //DEBUGGING METHOD!
-    public void addTourney(String name){
-        List<Player> players = new ArrayList<Player>();
-
-        for(int i=0; i<4; i++){
-            Player player = new Player("Team" + i,"Player" + i);
-            players.add(player);
-        }
-
-        Tournament tourney = new Tournament("Tourney 1", players,"Round Robin");
-
-        tournaments.add(tourney);
-    }
-
-    //DEBUGGING METHOD!
-    public void getTourney(View v){
-        List<Tournament> list = DataManager.getTournaments(getApplicationContext());
-        System.out.println(list);
     }
 
     private void populateListView(){
@@ -61,7 +32,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         List<String> tournamentNames = new ArrayList<String>();
         for(int i=0; i < tournaments.size(); i++){
             Tournament tournament = tournaments.get(i);
-            System.out.println(tournament.getName());
             tournamentNames.add(tournament.getName());
         }
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
@@ -73,7 +43,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        System.out.println("Populating!");
         Intent intent = new Intent(MainActivity.this,TournamentMain.class);
         intent.putExtra("Tournament Name", tournaments.get(position).getName());
         this.startActivity(intent);

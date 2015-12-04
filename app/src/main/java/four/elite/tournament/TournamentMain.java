@@ -37,6 +37,7 @@ public class TournamentMain extends AppCompatActivity implements AdapterView.OnI
         listView = (ListView)findViewById(R.id.playerList);
 
         tournament = DataManager.getTournamentByName(getApplicationContext(),bundle.getString("Tournament Name"));
+        tourneyNameLabel.setText(tournament.getName());
 
         populatePlayers();
     }
