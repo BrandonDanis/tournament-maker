@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Tournament implements Serializable{
+public class Tournament{
 
     private List<Player> players = new ArrayList<Player>();
     private List<Game> games = new ArrayList<Game>();

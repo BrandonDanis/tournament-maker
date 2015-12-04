@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -62,7 +63,7 @@ public class DataManager {
             e.printStackTrace();
         }
 
-        List<Tournament> tournaments = gson.fromJson(json, List.class);
+        List<Tournament> tournaments = gson.fromJson(json, new TypeToken<ArrayList<Tournament>>(){}.getType());
 
         return tournaments;
     }
