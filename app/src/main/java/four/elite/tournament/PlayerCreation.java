@@ -23,8 +23,6 @@ public class PlayerCreation extends AppCompatActivity {
         teamNameLabel = (TextView)findViewById(R.id.teamNameLabel);
         teamImage = (ImageView)findViewById(R.id.teamImage);
 
-
-
     }
 
     public void cancelButtonClicked(View v){
@@ -46,7 +44,7 @@ public class PlayerCreation extends AppCompatActivity {
             intent.putExtra("Player Name",playerNameLabel.getText().toString());
             intent.putExtra("Team Name",teamNameLabel.getText().toString());
 
-            setResult(200,intent);
+            setResult(200, intent);
             finish();
 
         }

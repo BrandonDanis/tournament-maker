@@ -38,7 +38,6 @@ android:paddingBottom="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
-            android:text="Tournament Name"
             android:ems="10"
             android:id="@+id/tournamentName" />
 
@@ -61,13 +60,29 @@ android:paddingBottom="8dp"
             android:layout_gravity="center_horizontal"
             android:layout_weight="1.12" />
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Add Player"
-            android:onClick="addingNewPlayer"
-            android:id="@+id/button"
-            android:layout_gravity="center_horizontal" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="Add Player"
+                android:onClick="addingNewPlayer"
+                android:id="@+id/button"
+                android:layout_gravity="center_horizontal" />
+
+            <Button
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="Finish"
+                android:onClick="finishCreation"
+                android:id="@+id/button4"
+                android:layout_gravity="center_horizontal"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+        </RelativeLayout>
 
     </LinearLayout>
 

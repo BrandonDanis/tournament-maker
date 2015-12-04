@@ -39,7 +39,12 @@ public class MySimpleArrayAdapter extends ArrayAdapter{
 
         nameLabel.setText(names[position]);
         teamNameLabel.setText(teams[position]);
-        rankingLabel.setText("Rank: " + Integer.toString(rankings[position]));
+        if(rankings[position] == 0){
+            rankingLabel.setText("");
+        }else{
+            rankingLabel.setText("Rank: " + Integer.toString(rankings[position]));
+        }
+
 
         return rowView;
 

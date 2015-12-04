@@ -1,5 +1,7 @@
 package four.elite.tournament;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,7 +77,32 @@ public class MainCreate extends AppCompatActivity implements AdapterView.OnItemC
     }
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+    public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+
+        new AlertDialog.Builder(this)
+                .setMessage("Are you sure you want to remove user?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        players.remove(position);
+                        populatePlayers();
+                    }
+                })
+                .setNegativeButton("No", null)
+                .show();
+
+    }
+
+    public void finishCreation(View v){
+
+        if(players.size() < 2){
+            Toast toast = Toast.makeText(getApplicationContext(), "Need at least 2 players", Toast.LENGTH_LONG);
+            toast.show();
+        }else{
+
+            //FIND A WAY TO CREATE TOURNAMENT AND ADD IT TO MAINACTIVITY TOURNAMENTS!
+
+        }
 
     }
 
