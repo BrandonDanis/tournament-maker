@@ -1,9 +1,13 @@
 package four.elite.tournament;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Player {
 
     private String teamName,playerName;
-    private int ranking,gamesPlayed,gamesWon;
+    private int ranking,gamesPlayed,gamesWon, totalGames, totalGoalsFor, totalGoalsAgainst;
+    private List <Game> games = new ArrayList<Game>();
+    private List<Player> otherPlayers = new ArrayList<Player>();
 
     public Player(){}
 
@@ -28,8 +32,45 @@ public class Player {
         return this.gamesWon;
     }
 
+    public void addGames(Game game)
+    {
+        games.add(game);
+    }
+    public void addOtherPlayer(Player other)
+    {
+        otherPlayers.add(other);
+    }
+
+    public int totalGames()
+    {
+        return totalGames;
+    }
+    public void incrementTotalGames()
+    {
+        totalGames++;
+    }
+    public Game getGame(int index)
+    {
+        return games.get(index);
+    }
     public int getRanking(){
         return this.ranking;
+    }
+
+    public Player getOtherPlayer(int index)
+    {
+        return otherPlayers.get(index);
+    }
+    public boolean alreadyPlayed (Player other)
+    {
+        for(int i = 0; i < otherPlayers.size(); i++)
+        {
+            if(otherPlayers.get(i).getTeamName() == other.getTeamName())
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void setName(String name){
@@ -50,6 +91,25 @@ public class Player {
 
     public void setGamesPlayed(int games){
         this.gamesPlayed = games;
+    }
+
+    public void addGoalsFor(int goals)
+    {
+        totalGoalsFor += goals;
+    }
+    public void addGoalsAgainst(int goalsAgainst)
+    {
+        totalGoalsAgainst += goalsAgainst;
+    }
+
+    public int getTotalGoalsFor()
+    {
+        return totalGoalsFor;
+    }
+
+    public int getTotalGoalsAgainst()
+    {
+        return totalGoalsAgainst;
     }
 
 }
