@@ -72,8 +72,10 @@ public class TournamentMain extends AppCompatActivity implements AdapterView.OnI
     public void viewingNextMatch(View v){
         Intent intent = new Intent(TournamentMain.this,MatchActivity.class);
 
-        //Store anything in bundle here
+        Gson gson = new Gson();
 
+        //Store anything in bundle here
+//        intent.putExtra("game", gson.toJson(tournament.getNextGame()));
 
         this.startActivityForResult(intent, 200);
     }
@@ -85,10 +87,14 @@ public class TournamentMain extends AppCompatActivity implements AdapterView.OnI
         //matchActivity result
         if(requestCode == 200 && resultCode == 200){
             //handle return values
-            int homeScore = data.getIntExtra("homeScore",0); //if homeScore is null, it will set to 0
-            int awayScore = data.getIntExtra("awayScore",0); //if awayScore is null, it will set to 0
+            Gson gson = new Gson();
+            String json = data.getStringExtra("game");
+            Game game = gson.fromJson(json, Game.class);
 
-            //Handle finishing match
+            //SET THIS GAME TO PLAYED IN TOURNAMENT
+            //NOT SAME GAME AS WHAT WE SENT
+            //THEREFORE YOU MUST FIND THE RIGHT GAME WITH SIMILAR
+            //VALUES AND REPLACE IT :)
 
         }
 

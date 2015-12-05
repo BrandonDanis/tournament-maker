@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="?android:attr/listPreferredItemHeight">
+
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Tournament Name"
+        android:id="@+id/tournamentNameLabel"
+        android:layout_alignParentTop="true"
+        android:gravity="center_horizontal"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Players: 2"
+        android:id="@+id/numOfPlayerLabel"
+        android:gravity="center_horizontal"
+        android:layout_below="@+id/tournamentNameLabel"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Type: Round Robin"
+        android:id="@+id/tournamentTypeLabel"
+        android:gravity="center_horizontal"
+        android:layout_below="@+id/numOfPlayerLabel"
+        android:layout_centerHorizontal="true" />
+</RelativeLayout>
