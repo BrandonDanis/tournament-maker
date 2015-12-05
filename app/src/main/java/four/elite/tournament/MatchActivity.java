@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class MatchActivity extends AppCompatActivity {
@@ -23,6 +24,10 @@ public class MatchActivity extends AppCompatActivity {
     ImageView homeImage;
     ImageView awayImage;
 
+    Game game;
+
+    Gson gson;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,16 +36,21 @@ public class MatchActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
 
+        gson = new Gson();
+
+        String json = bundle.getString("game");
+        game = gson.fromJson(json, Game.class);
+
         //init all textviews and images
         homeTeamLabel = (TextView)findViewById(R.id.homeTeamLabel);
         awayTeamLabel = (TextView)findViewById(R.id.awayTeamLabel);
         homePlayerName = (TextView)findViewById(R.id.homePlayerLabel);
         awayPlayerName = (TextView)findViewById(R.id.awayPlayerLabel);
 
-//        homeTeamLabel.setText(bundle.getString("Home Team Name"));
-//        awayTeamLabel.setText(bundle.getString("Away Team Name"));
-//        homePlayerName.setText(bundle.getString("Home Player Name"));
-//        awayPlayerName.setText(bundle.getString("Away Player Name"));
+        homeTeamLabel.setText(game.getHomeTeam().getTeamName());
+        awayTeamLabel.setText(game.getAwayTeam().getTeamName());
+        homePlayerName.setText(game.getHomeTeam().getName());
+        awayPlayerName.setText(game.getAwayTeam().getName());
 
         //init number pickers
         homeTeamScore = (NumberPicker)findViewById(R.id.homeTeamScore);
@@ -55,8 +65,8 @@ public class MatchActivity extends AppCompatActivity {
         ImageLoader imageLoader = ImageLoader.getInstance();
         homeImage = (ImageView)findViewById(R.id.homeTeamImage);
         awayImage = (ImageView)findViewById(R.id.awayTeamImage);
-//        imageLoader.displayImage(bundle.getString("Away URL"),homeImage);
-//        imageLoader.displayImage(bundle.getString("Home URL"),awayImage);
+        imageLoader.displayImage(game.getHomeTeam().getImageUrl(),homeImage);
+        imageLoader.displayImage(game.getHomeTeam().getImageUrl(),awayImage);
 
     }
 
@@ -66,9 +76,11 @@ public class MatchActivity extends AppCompatActivity {
 
     public void confirmScore(View v){
         Intent intent = new Intent();
-        intent.putExtra("homeScore", homeTeamScore.getValue());
-        intent.putExtra("awayScore", awayTeamScore.getValue());
 
+        game.setHomeTeamScore(homeTeamScore.getValue());
+        game.setAwayTeamScore(awayTeamScore.getValue());
+
+        intent.putExtra("game",gson.toJson(this.game));
         setResult(200, intent);
         finish();
 
