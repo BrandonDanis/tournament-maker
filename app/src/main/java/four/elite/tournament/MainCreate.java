@@ -87,7 +87,7 @@ public class MainCreate extends AppCompatActivity implements AdapterView.OnItemC
     public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
 
         new AlertDialog.Builder(this)
-                .setMessage("Are you sure you want to remove user?")
+                .setMessage("Are you sure you want to remove this user?")
                 .setCancelable(false)
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="18dp"
+    android:paddingRight="18dp"
+    tools:context="four.elite.tournament.MatchActivity">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:id="@+id/homeTeamImage"
+            android:layout_marginTop="26dp"
+            android:src="@mipmap/ic_launcher"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <ImageView
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:id="@+id/awayTeamImage"
+            android:layout_marginTop="26dp"
+            android:src="@mipmap/ic_launcher"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Home Team"
+            android:id="@+id/textView7"
+            android:layout_below="@+id/homeTeamImage"
+            android:layout_alignRight="@+id/homeTeamImage"
+            android:layout_alignEnd="@+id/homeTeamImage" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Away Team"
+            android:id="@+id/textView8"
+            android:layout_below="@+id/awayTeamImage"
+            android:layout_alignLeft="@+id/awayTeamImage"
+            android:layout_alignStart="@+id/awayTeamImage" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="vs."
+            android:id="@+id/textView9"
+            android:layout_marginBottom="51dp"
+            android:layout_above="@+id/textView8"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+</RelativeLayout>

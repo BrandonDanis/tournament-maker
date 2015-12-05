@@ -1,6 +1,8 @@
 package four.elite.tournament;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -37,6 +39,19 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         this.tournaments = DataManager.getTournaments(getApplicationContext());
 
         listView = (ListView)findViewById(R.id.listView);
+
+
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+                promptTournamentRemoval(position);
+                return true;
+            }
+
+        });
+
+
 
         if(tournaments != null)
             populateListView();
@@ -88,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         Gson gson = new Gson();
 
         //returned from MainCreate with valid data
-        if(requestCode == 200 && requestCode == 200){
+        if(requestCode == 200 && resultCode == 200){
             String jsonSTR = data.getStringExtra("tournament-object");
             Tournament tournamentToAdd = gson.fromJson(jsonSTR, Tournament.class);
 
@@ -98,5 +113,22 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }
 
     }
+
+    private void promptTournamentRemoval(int position){
+        final int pos = position;
+        new AlertDialog.Builder(this)
+                .setMessage("Are you sure you want to remove this tournament?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        tournaments.remove(pos);
+                        populateListView();
+                        DataManager.saveTournaments(getApplicationContext(),tournaments);
+                    }
+                })
+                .setNegativeButton("No", null)
+                .show();
+    }
+
 
 }
