@@ -8,16 +8,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
-
 public class TournamentMain extends AppCompatActivity implements AdapterView.OnItemClickListener
 {
     public static Tournament tournament;
@@ -46,17 +36,20 @@ public class TournamentMain extends AppCompatActivity implements AdapterView.OnI
 
         String[] names = new String[tournament.getPlayers().size()];
         String[] teams = new String[tournament.getPlayers().size()];
+        String[] urls = new String[tournament.getPlayers().size()];
         int[] rankings = new int[tournament.getPlayers().size()];
 
         for(int i=0; i< tournament.getPlayers().size(); i++){
             names[i] = tournament.getPlayers().get(i).getName();
             teams[i] = tournament.getPlayers().get(i).getTeamName();
             rankings[i] = tournament.getPlayers().get(i).getRanking();
+            urls[i] = tournament.getPlayers().get(i).getImageUrl();
         }
 
-        MySimpleArrayAdapter arrayAdapter = new MySimpleArrayAdapter(getApplicationContext(), names, teams, rankings);
+        MySimpleArrayAdapter arrayAdapter = new MySimpleArrayAdapter(getApplicationContext(), names, teams, rankings, urls);
         listView.setAdapter(arrayAdapter);
         listView.setOnItemClickListener(this);
+
     }
 
     @Override

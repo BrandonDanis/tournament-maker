@@ -6,6 +6,10 @@ import android.content.SharedPreferences;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -63,7 +67,8 @@ public class DataManager {
             e.printStackTrace();
         }
 
-        List<Tournament> tournaments = gson.fromJson(json, new TypeToken<ArrayList<Tournament>>(){}.getType());
+        List<Tournament> tournaments = gson.fromJson(json, new TypeToken<ArrayList<Tournament>>() {
+        }.getType());
 
         return tournaments;
     }
@@ -74,6 +79,58 @@ public class DataManager {
             if(tournaments.get(i).getName().equals(name)){
                 return tournaments.get(i);
             }
+        }
+        return null;
+    }
+
+    public static String getTeamsDatabaseJSONstring(Context context)
+    {
+
+        JSONObject jsonOBJ;
+        String jsonSTR;
+        BufferedReader br = null;
+
+        try{
+            br = new BufferedReader(new InputStreamReader(context.getAssets().open("TeamsDatabase.json")));
+        }catch (IOException e){
+            System.out.print("Fail");
+        }
+
+        // Reading json file from assets folder
+        StringBuffer sb = new StringBuffer();
+        try {
+            String temp;
+            while ((temp = br.readLine()) != null)
+                sb.append(temp);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            try {
+                br.close(); // stop reading
+            } catch (IOException e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+
+        String myjsonstring = sb.toString();
+        return myjsonstring;
+
+    }
+
+    public static String getTeamImageUrlWithName(Context context, String name){
+        try{
+            JSONArray jsonArr = new JSONArray(getTeamsDatabaseJSONstring(context));
+
+            for(int i=0; i<jsonArr.length(); i++){
+                if(jsonArr.getJSONObject(i).getString("name").equals(name)){
+                    return jsonArr.getJSONObject(i).getString("imgPath");
+                }
+            }
+
+        }catch (JSONException e){
+            e.printStackTrace();
         }
         return null;
     }

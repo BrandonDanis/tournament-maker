@@ -4,23 +4,36 @@
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-android:paddingBottom="8dp"
-    tools:context="four.elite.tournament.MainCreate">
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="four.elite.tournament.PlayerCreation">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:weightSum="1"
-        android:layout_alignParentBottom="true">
+        android:layout_height="match_parent"
+        android:weightSum="1">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Tournament Setup"
+            android:text="Create a new player"
             android:id="@+id/textView"
             android:layout_gravity="center_horizontal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Player name:"
+            android:id="@+id/textView5" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/playerNameLabel" />
 
         <Space
             android:layout_width="fill_parent"
@@ -30,62 +43,55 @@ android:paddingBottom="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Tournament Name:"
-            android:id="@+id/textView3"
-            android:layout_gravity="center_horizontal" />
+            android:text="Team name:"
+            android:id="@+id/textView6" />
 
-        <EditText
+        <AutoCompleteTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
             android:ems="10"
-            android:id="@+id/tournamentName" />
+            android:id="@+id/teamNameLabel" />
 
         <Space
             android:layout_width="fill_parent"
-            android:layout_height="12dp" />
+            android:layout_height="40px" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Players:"
-            android:id="@+id/textView4"
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:id="@+id/teamImage"
+            android:src="@drawable/ic_launcher"
             android:layout_gravity="center_horizontal" />
 
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="259dp"
-            android:id="@+id/playerListView"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="1.12" />
+        <Space
+            android:layout_width="fill_parent"
+            android:layout_height="40px"
+            android:layout_weight="0.44" />
 
         <RelativeLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
 
             <Button
-                android:layout_width="150dp"
+                android:layout_width="140dp"
                 android:layout_height="wrap_content"
                 android:text="Add Player"
-                android:onClick="addingNewPlayer"
-                android:id="@+id/button"
-                android:layout_gravity="center_horizontal" />
+                android:onClick="tryToAddUser"
+                android:id="@+id/button3" />
 
             <Button
-                android:layout_width="150dp"
+                android:layout_width="140dp"
                 android:layout_height="wrap_content"
-                android:text="Finish"
-                android:onClick="finishCreation"
-                android:id="@+id/button4"
-                android:layout_gravity="center_horizontal"
+                android:text="Cancel"
+                android:id="@+id/button5"
+                android:onClick="cancelButtonClicked"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true" />
         </RelativeLayout>
 
     </LinearLayout>
-
-
-
 </RelativeLayout>

@@ -5,7 +5,9 @@ import java.util.List;
 public class Player {
 
     private String teamName,playerName,imageUrl;
+
     private int ranking,gamesPlayed,gamesWon, totalGoalsFor, totalGoalsAgainst;
+
     private List <Game> games = new ArrayList<Game>();
     private List<Player> otherPlayers = new ArrayList<Player>();
 
@@ -75,6 +77,7 @@ public class Player {
     {
         return otherPlayers.get(index);
     }
+
     public boolean alreadyPlayed (Player other)
     {
         for(int i = 0; i < otherPlayers.size(); i++)
