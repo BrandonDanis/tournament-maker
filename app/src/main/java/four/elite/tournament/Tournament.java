@@ -20,6 +20,21 @@ public class Tournament{
         this.numberOfPlayers = players.size();
         this.name = name;
         maxGamesPerPlayer = players.size() - 1;
+
+        switch (tournamentFormat){
+            case "Round Robin":
+
+                break;
+
+            case "Knockout":
+
+                break;
+
+            case "Round Robin & Knockout":
+
+                break;
+        }
+
     }
 
     public String getName() {

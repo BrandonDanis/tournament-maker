@@ -74,6 +74,7 @@ public class TournamentMain extends AppCompatActivity implements AdapterView.OnI
 
         //Store anything in bundle here
 
+
         this.startActivityForResult(intent, 200);
     }
 
