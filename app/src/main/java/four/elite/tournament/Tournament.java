@@ -123,10 +123,12 @@ public class Tournament{
             players.get(numPlayers - i - 1).addGames(current);
         }
     }
+
     public Player getPlayer(int index)
     {
         return players.get(index);
     }
+
     public void advanceNextRound()
     {
         List<Game> lastRound = new ArrayList<Game>();

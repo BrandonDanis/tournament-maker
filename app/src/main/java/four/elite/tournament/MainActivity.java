@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             tournamentNames.add(tournament.getName());
         }
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
-                this, android.R.layout.simple_list_item_2, tournamentNames
+                this, android.R.layout.simple_list_item_1, tournamentNames
         );
         listView.setAdapter(arrayAdapter);
         listView.setOnItemClickListener(this);
@@ -91,13 +91,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         if(requestCode == 200 && requestCode == 200){
             String jsonSTR = data.getStringExtra("tournament-object");
             Tournament tournamentToAdd = gson.fromJson(jsonSTR, Tournament.class);
-
-            List<Player> laLigaPlayers = new ArrayList<Player>();
-            Player messi = new Player("Barcelona","Lionel Messi", null);
-            Player ronaldo = new Player("Real Madrid","Cristiano Ronaldo", null);
-            laLigaPlayers.add(messi);
-            laLigaPlayers.add(ronaldo);
-            Tournament laLiga = new Tournament("La Liga", laLigaPlayers, "Round Robin");
 
             tournaments.add(tournamentToAdd);
             DataManager.saveTournaments(this, tournaments);

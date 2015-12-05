@@ -50,11 +50,7 @@ public class MySimpleArrayAdapter extends ArrayAdapter{
             rankingLabel.setText("Rank: " + Integer.toString(rankings[position]));
         }
 
-        if(imageUrls[position] == null){
-            imageLoader.displayImage("http://dogr.io/doge.png", imageView);
-        }else{
-            imageLoader.displayImage(imageUrls[position], imageView);
-        }
+        imageLoader.displayImage(imageUrls[position], imageView);
 
 
         return rowView;

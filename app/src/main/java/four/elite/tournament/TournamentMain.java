@@ -62,6 +62,7 @@ public class TournamentMain extends AppCompatActivity implements AdapterView.OnI
         intent.putExtra("Player Ranking", tournament.getPlayers().get(position).getRanking());
         intent.putExtra("Player Games", tournament.getPlayers().get(position).getGamesPlayed());
         intent.putExtra("Player Wins", tournament.getPlayers().get(position).getGamesWon());
+        intent.putExtra("Image URL", tournament.getPlayers().get(position).getImageUrl());
         this.startActivity(intent);
 
     }

@@ -17,6 +17,10 @@ public class Player {
         this.teamName = teamName;
         this.playerName = playerName;
         this.imageUrl = url;
+        if(url == null){
+            this.imageUrl = "http://dogr.io/doge.png";
+        }
+
     }
 
     public String getName(){
