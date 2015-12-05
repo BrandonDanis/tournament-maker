@@ -5,7 +5,9 @@ import java.util.List;
 public class Player {
 
     private String teamName,playerName,imageUrl;
-    private int ranking,gamesPlayed,gamesWon, totalGames, totalGoalsFor, totalGoalsAgainst;
+
+    private int ranking,gamesPlayed,gamesWon, totalGoalsFor, totalGoalsAgainst;
+
     private List <Game> games = new ArrayList<Game>();
     private List<Player> otherPlayers = new ArrayList<Player>();
 
@@ -50,20 +52,25 @@ public class Player {
         otherPlayers.add(other);
     }
 
-    public int totalGames()
-    {
-        return totalGames;
-    }
-    public void incrementTotalGames()
-    {
-        totalGames++;
-    }
+
     public Game getGame(int index)
     {
         return games.get(index);
     }
     public int getRanking(){
         return this.ranking;
+    }
+
+    public boolean checkAlreadyPlaying(Player other)
+    {
+        for(int i = 0; i < otherPlayers.size(); i++)
+        {
+            if(other == otherPlayers.get(i))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     public Player getOtherPlayer(int index)
