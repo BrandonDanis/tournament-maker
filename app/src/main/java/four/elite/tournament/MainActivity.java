@@ -1,7 +1,6 @@
 package four.elite.tournament;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -14,15 +13,12 @@ import java.util.List;
 import android.widget.ArrayAdapter;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
-
-import junit.framework.Test;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 

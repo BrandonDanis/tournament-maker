@@ -67,4 +67,27 @@ public class TournamentMain extends AppCompatActivity implements AdapterView.OnI
 
     }
 
+    public void viewingNextMatch(View v){
+        Intent intent = new Intent(TournamentMain.this,MatchActivity.class);
+
+        //Store anything in bundle here
+
+        this.startActivityForResult(intent, 200);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        //matchActivity result
+        if(requestCode == 200 && resultCode == 200){
+            //handle return values
+            int homeScore = data.getIntExtra("homeScore",0); //if homeScore is null, it will set to 0
+            int awayScore = data.getIntExtra("awayScore",0); //if awayScore is null, it will set to 0
+
+            //Handle finishing match
+
+        }
+
+    }
 }
