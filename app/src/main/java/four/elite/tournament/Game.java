@@ -50,7 +50,15 @@ public class Game {
         }
         return null;
     }
-
+    
+    public void setHomeTeamScore(int score)
+    {
+    	this.homeScore = score;
+    }
+    public void setAwayTeamScore(int score)
+    {
+    	this.awayScore = score;
+    }
 
 
 }

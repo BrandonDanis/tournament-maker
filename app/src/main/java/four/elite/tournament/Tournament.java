@@ -8,6 +8,8 @@ public class Tournament{
 
     private List<Player> players = new ArrayList<Player>();
     private List<Game> games = new ArrayList<Game>();
+    private boolean played = false;
+    private int gameCounter;
     private int numberOfPlayers;
     private String name;
     private int maxGamesPerPlayer;
@@ -19,19 +21,20 @@ public class Tournament{
         this.tournamentFormat = tournamentFormat;
         this.numberOfPlayers = players.size();
         this.name = name;
+        this.gameCounter = 0;
         maxGamesPerPlayer = players.size() - 1;
 
         switch (tournamentFormat){
             case "Round Robin":
-
+                this.setRoundRobinGames();
                 break;
 
             case "Knockout":
-
+                this.setKnockOut();
                 break;
 
             case "Round Robin & Knockout":
-
+                this.setRoundRobinGames();
                 break;
         }
 
@@ -56,12 +59,12 @@ public class Tournament{
         int homeOrAway;
         for(int i = 0; i < players.size(); i++)
         {
-            homeOrAway = (int)(Math.random()*(2));
-            current = new Game();
-            for(int j = 0; j < players.size(); j++)
+            for(int j = i; j < players.size(); j++)
             {
+                homeOrAway = (int)(Math.random()*(2));
                 if(i != j)
                 {
+                    current = new Game();
                     if(homeOrAway == 0)
                     {
                         current.setHomeTeam(players.get(i));
@@ -73,10 +76,13 @@ public class Tournament{
                         current.setAwayTeam(players.get(i));
                     }
                     players.get(i).addGames(current);
+                    players.get(i).addOtherPlayer(players.get(j));
                     players.get(j).addGames(current);
+                    players.get(j).addOtherPlayer(players.get(i));
                     games.add(current);
                 }
             }
+
         }
     }
     public void sortRankings()
@@ -179,6 +185,38 @@ public class Tournament{
     public Game getGame(int index)
     {
         return games.get(index);
+    }
+
+    public boolean tournamentFinished()
+    {
+        for(int i = 0; i < games.size(); i++)
+        {
+            if(!(games.get(i).getPlayed()))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+    public int numberOfGames()
+    {
+        return games.size();
+    }
+    public void setGamePlayed(int index)
+    {
+        games.get(index).setPlayed(true);
+    }
+
+    public Game getNextGame()
+    {
+        Game next = games.get(gameCounter);
+        gameCounter++;
+        return next;
+    }
+
+    public String getType()
+    {
+        return tournamentFormat;
     }
 
 
