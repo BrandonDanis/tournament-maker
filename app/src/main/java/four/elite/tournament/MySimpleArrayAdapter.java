@@ -35,7 +35,7 @@ public class MySimpleArrayAdapter extends ArrayAdapter{
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        View rowView = inflater.inflate(R.layout.rowlayout, parent, false);
+        View rowView = inflater.inflate(R.layout.row_layout, parent, false);
 
         TextView nameLabel = (TextView)rowView.findViewById(R.id.firstLine);
         TextView teamNameLabel = (TextView)rowView.findViewById(R.id.description);

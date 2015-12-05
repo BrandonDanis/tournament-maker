@@ -151,6 +151,16 @@ public class Tournament{
         }
     }
 
+    public List<Game> getPlayedGames(){
+        List<Game> gamesPlayed = new ArrayList<Game>();
+        for(int i=0; i<games.size(); i++){
+            if(games.get(i).getPlayed()){
+                gamesPlayed.add(games.get(i));
+            }
+        }
+        return gamesPlayed;
+    }
+
     public Game getGame(int index)
     {
         return games.get(index);

@@ -12,13 +12,13 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
 
-public class matchLayoutArrayAdapter extends ArrayAdapter{
+public class MatchLayoutArrayAdapter extends ArrayAdapter{
 
     Context context;
 
     List<Game> matches;
-    
-    public matchLayoutArrayAdapter(Context context, List<Game> matches) {
+
+    public MatchLayoutArrayAdapter(Context context, List<Game> matches) {
         super(context, -1, matches.size());
         this.context = context;
         this.matches = matches;
@@ -32,23 +32,23 @@ public class matchLayoutArrayAdapter extends ArrayAdapter{
 
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        View rowView = inflater.inflate(R.layout.matchLayout, parent, false);
+        View rowView = inflater.inflate(R.layout.match_layout, parent, false);
 
-        TextView homeTeamName = (TextView)rowView.findViewById(R.id.homeTeamName);
-        TextView awayTeamName = (TextView)rowView.findViewById(R.id.awayTeamName);
+        TextView homeTeamScore = (TextView)rowView.findViewById(R.id.homeTeamScore);
+        TextView awayTeamScore = (TextView)rowView.findViewById(R.id.awayTeamScore);
         TextView homePlayerName = (TextView)rowView.findViewById(R.id.homePlayerName);
         TextView awayPlayerName = (TextView)rowView.findViewById(R.id.awayPlayerName);
         ImageView homeImage = (ImageView)rowView.findViewById(R.id.homeTeamImage);
         ImageView awayImage = (ImageView)rowView.findViewById(R.id.awayTeamImage);
 
-        homeTeamName.setText(matches.get(position).getHomeTeam().getTeamName());
-        awayTeamName.setText(matches.get(position).getAwayTeam().getTeamName());
+        homeTeamScore.setText(matches.get(position).getHomeTeam().getTeamName());
+        awayTeamScore.setText(matches.get(position).getAwayTeam().getTeamName());
 
         homePlayerName.setText(matches.get(position).getHomeTeam().getName());
         awayPlayerName.setText(matches.get(position).getAwayTeam().getName());
 
 
-        imageLoader.displayImage(matches.get(position).getHomeTeam().getImageUrl(),homeImage);
+        imageLoader.displayImage(matches.get(position).getHomeTeam().getImageUrl(), homeImage);
         imageLoader.displayImage(matches.get(position).getAwayTeam().getImageUrl(),awayImage);
 
         return rowView;

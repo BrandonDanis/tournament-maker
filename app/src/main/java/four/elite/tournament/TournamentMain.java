@@ -8,6 +8,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+
 public class TournamentMain extends AppCompatActivity implements AdapterView.OnItemClickListener
 {
     public static Tournament tournament;
@@ -90,4 +92,13 @@ public class TournamentMain extends AppCompatActivity implements AdapterView.OnI
         }
 
     }
+
+    public void viewMatches(View v){
+        Intent intent = new Intent(TournamentMain.this,MatchHistory.class);
+        Gson gson = new Gson();
+        String matchesSTR = gson.toJson(tournament.getPlayedGames());
+        intent.putExtra("matches",matchesSTR);
+        this.startActivity(intent);
+    }
+
 }
