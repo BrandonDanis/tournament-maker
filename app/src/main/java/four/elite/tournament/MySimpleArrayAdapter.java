@@ -8,24 +8,29 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
+
 public class MySimpleArrayAdapter extends ArrayAdapter{
 
     private final Context context;
-    private final String[] names,teams;
+    private final String[] names,teams,imageUrls;
     private final int[] rankings;
 
-    public MySimpleArrayAdapter(Context context, String[] names, String[] teams, int[] ranking) {
+    public MySimpleArrayAdapter(Context context, String[] names, String[] teams, int[] ranking, String[] imageUrls) {
         super(context, -1, names);
         this.context = context;
 
         this.names = names;
         this.rankings = ranking;
         this.teams = teams;
+        this.imageUrls = imageUrls;
 
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+
+        final ImageLoader imageLoader = ImageLoader.getInstance();
 
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -43,6 +48,12 @@ public class MySimpleArrayAdapter extends ArrayAdapter{
             rankingLabel.setText("");
         }else{
             rankingLabel.setText("Rank: " + Integer.toString(rankings[position]));
+        }
+
+        if(imageUrls[position] == null){
+            imageLoader.displayImage("http://dogr.io/doge.png", imageView);
+        }else{
+            imageLoader.displayImage(imageUrls[position], imageView);
         }
 
 

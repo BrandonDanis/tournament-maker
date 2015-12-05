@@ -15,8 +15,8 @@ public class Testing {
         List<Tournament> tournaments = new ArrayList<Tournament>();
 
         List<Player> laLigaPlayers = new ArrayList<Player>();
-        Player messi = new Player("Barcelona","Lionel Messi");
-        Player ronaldo = new Player("Real Madrid","Cristiano Ronaldo");
+        Player messi = new Player("Barcelona","Lionel Messi", null);
+        Player ronaldo = new Player("Real Madrid","Cristiano Ronaldo", null);
         laLigaPlayers.add(messi);
         laLigaPlayers.add(ronaldo);
         Tournament laLiga = new Tournament("La Liga", laLigaPlayers, "Round Robin");

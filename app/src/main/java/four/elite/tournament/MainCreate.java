@@ -45,14 +45,17 @@ public class MainCreate extends AppCompatActivity implements AdapterView.OnItemC
 
         String[] names = new String[players.size()];
         String[] teams = new String[players.size()];
+        String[] imageUrls = new String[players.size()];
         int[] rankings = new int[players.size()];
+
 
         for(int i=0; i< players.size(); i++){
             names[i] = players.get(i).getName();
             teams[i] = players.get(i).getTeamName();
+            imageUrls[i] = players.get(i).getImageUrl();
         }
 
-        MySimpleArrayAdapter arrayAdapter = new MySimpleArrayAdapter(getApplicationContext(), names, teams, rankings);
+        MySimpleArrayAdapter arrayAdapter = new MySimpleArrayAdapter(getApplicationContext(), names, teams, rankings, imageUrls);
         playersListView.setAdapter(arrayAdapter);
         playersListView.setOnItemClickListener(this);
 
@@ -66,8 +69,10 @@ public class MainCreate extends AppCompatActivity implements AdapterView.OnItemC
 
             String playerName = data.getStringExtra("Player Name");
             String teamName = data.getStringExtra("Team Name");
+            String imageUrl = data.getStringExtra("Image URL");
 
-            Player playerToAdd = new Player(teamName, playerName);
+
+            Player playerToAdd = new Player(teamName, playerName, imageUrl);
 
             players.add(playerToAdd);
 

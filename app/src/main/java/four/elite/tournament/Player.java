@@ -14,6 +14,7 @@ public class Player {
     public Player(String teamName, String playerName, String url){
         this.teamName = teamName;
         this.playerName = playerName;
+        this.imageUrl = url;
     }
 
     public String getName(){
