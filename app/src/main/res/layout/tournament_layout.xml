@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Type: Round Robin"
-        android:id="@+id/tournamentLabelLabel"
+        android:id="@+id/tournamentTypeLabel"
         android:gravity="center_horizontal"
         android:layout_below="@+id/numOfPlayerLabel"
         android:layout_centerHorizontal="true" />
