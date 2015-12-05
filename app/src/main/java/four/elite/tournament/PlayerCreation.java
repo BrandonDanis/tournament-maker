@@ -12,6 +12,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
+
 import java.lang.reflect.Array;
 import java.util.Arrays;
 
@@ -31,7 +38,11 @@ public class PlayerCreation extends AppCompatActivity {
 
         playerNameLabel = (TextView)findViewById(R.id.playerNameLabel);
         teamNameLabel = (AutoCompleteTextView)findViewById(R.id.teamNameLabel);
+
+        final ImageLoader imageLoader = ImageLoader.getInstance();
         teamImage = (ImageView)findViewById(R.id.teamImage);
+
+
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>
                 (this,android.R.layout.select_dialog_item, teams);
@@ -53,9 +64,9 @@ public class PlayerCreation extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if(Arrays.asList(teams).contains(teamNameLabel.getText().toString())){
+                if (Arrays.asList(teams).contains(teamNameLabel.getText().toString())){
                     String url = DataManager.getTeamImageUrlWithName(getApplicationContext(),teamNameLabel.getText().toString());
-                    
+                    imageLoader.displayImage(url, teamImage);
                 }
             }
 

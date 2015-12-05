@@ -4,20 +4,28 @@ import java.util.List;
 
 public class Player {
 
-    private String teamName,playerName;
+    private String teamName,playerName,imageUrl;
     private int ranking,gamesPlayed,gamesWon, totalGames, totalGoalsFor, totalGoalsAgainst;
     private List <Game> games = new ArrayList<Game>();
     private List<Player> otherPlayers = new ArrayList<Player>();
 
     public Player(){}
 
-    public Player(String teamName, String playerName){
+    public Player(String teamName, String playerName, String url){
         this.teamName = teamName;
         this.playerName = playerName;
     }
 
     public String getName(){
         return this.playerName;
+    }
+
+    public String getImageUrl(){
+        return this.imageUrl;
+    }
+
+    public void setImageUrl(String url){
+        this.imageUrl = url;
     }
 
     public String getTeamName(){
