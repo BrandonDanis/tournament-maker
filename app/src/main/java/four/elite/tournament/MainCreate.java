@@ -3,6 +3,7 @@ package four.elite.tournament;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SyncAdapterType;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +12,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +33,6 @@ public class MainCreate extends AppCompatActivity implements AdapterView.OnItemC
 
         tournamentName = (TextView)findViewById(R.id.tournamentName);
         playersListView = (ListView)findViewById(R.id.playerListView);
-
 
         populatePlayers();
 
@@ -103,9 +105,51 @@ public class MainCreate extends AppCompatActivity implements AdapterView.OnItemC
         if(players.size() < 2){
             Toast toast = Toast.makeText(getApplicationContext(), "Need at least 2 players", Toast.LENGTH_LONG);
             toast.show();
+        }else if (tournamentName.getText().toString().equals("")){
+            Toast toast = Toast.makeText(getApplicationContext(), "Not a valid Tournament name", Toast.LENGTH_LONG);
+            toast.show();
         }else{
 
-            //FIND A WAY TO CREATE TOURNAMENT AND ADD IT TO MAINACTIVITY TOURNAMENTS!
+            AlertDialog levelDialog;
+
+            final CharSequence[] options = {"Round Robin","Knockout","Round Robin & Knockout"};
+
+            AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+            dialog.setTitle("Select type of tournament!");
+            dialog.setSingleChoiceItems(options, -1, new DialogInterface.OnClickListener() {
+
+                public void onClick(DialogInterface dialog, int item) {
+
+                    //Setup intent
+                    final Intent intent = new Intent();
+                    Tournament newTournament;
+
+                    switch (item) {
+                        case 0:
+                            newTournament = new Tournament(tournamentName.getText().toString(),players,options[0].toString());
+                            intent.putExtra("tournament-object", new Gson().toJson(newTournament));
+                            setResult(200, intent);
+                            finish();
+                            break;
+                        case 1:
+                            newTournament = new Tournament(tournamentName.getText().toString(),players,options[1].toString());
+                            intent.putExtra("tournament-object", new Gson().toJson(newTournament));
+                            setResult(200, intent);
+                            finish();
+                            break;
+                        case 2:
+                            newTournament = new Tournament(tournamentName.getText().toString(),players,options[2].toString());
+                            intent.putExtra("tournament-object", new Gson().toJson(newTournament));
+                            setResult(200, intent);
+                            finish();
+                            break;
+                    }
+                }
+            });
+
+            dialog.setNegativeButton("Cancel", null);
+            levelDialog = dialog.create();
+            levelDialog.show();
 
         }
 

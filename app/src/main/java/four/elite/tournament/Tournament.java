@@ -19,6 +19,7 @@ public class Tournament{
         this.players = players;
         this.tournamentFormat = tournamentFormat;
         this.numberOfPlayers = players.size();
+        this.name = name;
         maxGamesPerPlayer = players.size() - 1;
     }
 

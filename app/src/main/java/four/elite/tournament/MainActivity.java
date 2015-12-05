@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import android.widget.ArrayAdapter;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -25,6 +27,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     private List<Tournament> tournaments = new ArrayList<>();
 
+    ListView listView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +36,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         this.tournaments = DataManager.getTournaments(getApplicationContext());
 
-        populateListView();
+        listView = (ListView)findViewById(R.id.listView);
+
+        if(tournaments != null)
+            populateListView();
 
         DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder()
                 .cacheOnDisc(true).cacheInMemory(true)
@@ -50,7 +57,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     private void populateListView(){
-        ListView listView = (ListView)findViewById(R.id.listView);
         List<String> tournamentNames = new ArrayList<String>();
         for(int i=0; i < tournaments.size(); i++){
             Tournament tournament = tournaments.get(i);
@@ -72,7 +78,32 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     public void initNewTourneySetup(View v){
         Intent intent = new Intent(MainActivity.this,MainCreate.class);
-        this.startActivity(intent);
+        this.startActivityForResult(intent, 200);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        Gson gson = new Gson();
+
+        //returned from MainCreate with valid data
+        if(requestCode == 200 && requestCode == 200){
+            String jsonSTR = data.getStringExtra("tournament-object");
+            Tournament tournamentToAdd = gson.fromJson(jsonSTR, Tournament.class);
+
+            List<Player> laLigaPlayers = new ArrayList<Player>();
+            Player messi = new Player("Barcelona","Lionel Messi", null);
+            Player ronaldo = new Player("Real Madrid","Cristiano Ronaldo", null);
+            laLigaPlayers.add(messi);
+            laLigaPlayers.add(ronaldo);
+            Tournament laLiga = new Tournament("La Liga", laLigaPlayers, "Round Robin");
+
+            tournaments.add(tournamentToAdd);
+            DataManager.saveTournaments(this, tournaments);
+            populateListView();
+        }
+
     }
 
 }

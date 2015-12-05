@@ -47,6 +47,10 @@ public class DataManager {
 
     }
 
+    public static void formatFile(Context context){
+        DataManager.saveTournaments(context, null);
+    }
+
     public static List<Tournament> getTournaments(Context context){
 
         Gson gson = new Gson();

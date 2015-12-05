@@ -21,9 +21,6 @@ public class Testing {
         laLigaPlayers.add(ronaldo);
         Tournament laLiga = new Tournament("La Liga", laLigaPlayers, "Round Robin");
 
-
-
-
         DataManager.saveTournaments(context, tournaments);
 
     }
