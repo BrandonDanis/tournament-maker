@@ -71,8 +71,11 @@ public class DataManager {
             e.printStackTrace();
         }
 
-        List<Tournament> tournaments = gson.fromJson(json, new TypeToken<ArrayList<Tournament>>() {
-        }.getType());
+        List<Tournament> tournaments = gson.fromJson(json, new TypeToken<ArrayList<Tournament>>(){}.getType());
+
+        if(tournaments == null){
+            return new ArrayList<Tournament>();
+        }
 
         return tournaments;
     }
