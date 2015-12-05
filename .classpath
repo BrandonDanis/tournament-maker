@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="app/build/generated/source/buildConfig/androidTest/debug"/>
+	<classpathentry kind="src" path="app/build/generated/source/buildConfig/debug"/>
+	<classpathentry kind="src" path="app/build/generated/source/r/debug"/>
+	<classpathentry kind="src" path="app/src/androidTest/java"/>
+	<classpathentry kind="src" path="app/src/main/java"/>
+	<classpathentry kind="src" path="app/src/test/java"/>
+	<classpathentry kind="lib" path="app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/jars/classes.jar"/>
+	<classpathentry kind="lib" path="app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/classes.jar"/>
+	<classpathentry kind="lib" path="app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/libs/internal_impl-23.0.1.jar"/>
+	<classpathentry kind="lib" path="app/build/intermediates/pre-dexed/debug/classes-55c9fc1b44dcb6016f171ec408b4b1a33e2a5cee.jar"/>
+	<classpathentry kind="lib" path="app/build/intermediates/pre-dexed/debug/classes-7ed3fc75b10df25639578e94285ee9e900ef82ba.jar"/>
+	<classpathentry kind="lib" path="app/build/intermediates/pre-dexed/debug/gson-1d1613dc1a898b887e6cb969355be6f85c67dedb.jar"/>
+	<classpathentry kind="lib" path="app/build/intermediates/pre-dexed/debug/internal_impl-23.0.1-4015ce0a1b72b75de4ee972ffdf2763bf3c016ab.jar"/>
+	<classpathentry kind="lib" path="app/build/intermediates/pre-dexed/debug/support-annotations-23.0.1-ccda441d0084d0975798ce60fc21c07d9257b558.jar"/>
+	<classpathentry kind="lib" path="app/libs/gson.jar"/>
+	<classpathentry kind="lib" path="gradle/wrapper/gradle-wrapper.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="app/build/intermediates/classes/debug"/>
+</classpath>

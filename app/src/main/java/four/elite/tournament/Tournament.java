@@ -8,7 +8,6 @@ public class Tournament{
 
     private List<Player> players = new ArrayList<Player>();
     private List<Game> games = new ArrayList<Game>();
-
     private int numberOfPlayers;
     private String name;
     private int maxGamesPerPlayer;
@@ -38,36 +37,29 @@ public class Tournament{
     public void setRoundRobinGames()
     {
         Game current;
-        int teamOne, homeOrAway, teamTwo;
-        for(int i = 0; i < (players.size() - 1)*(players.size() - 1); i++)
+        int homeOrAway;
+        for(int i = 0; i < players.size(); i++)
         {
-            teamOne = (int)(Math.random()*((players.size())));
-            teamTwo = (int)(Math.random()*((players.size())));
-            current = new Game();
             homeOrAway = (int)(Math.random()*(2));
-            if(players.get(teamOne).alreadyPlayed(players.get(teamTwo))&&
-                    players.get(teamOne).totalGames() != maxGamesPerPlayer &&
-                    players.get(teamTwo).totalGames() != maxGamesPerPlayer && teamOne != teamTwo) {
-                Player playerOne = players.get(teamOne);
-                Player playerTwo = players.get(teamTwo);
-                if (homeOrAway == 0) {
-                    current.setHomeTeam(playerOne);
-                    current.setAwayTeam(playerTwo);
-                } else {
-                    current.setAwayTeam(playerOne);
-                    current.setHomeTeam(playerTwo);
-                }
-                playerOne.incrementTotalGames();
-                playerOne.addOtherPlayer(playerTwo);
-                playerOne.addGames(current);
-                playerTwo.incrementTotalGames();
-                playerTwo.addOtherPlayer(playerOne);
-                playerTwo.addGames(current);
-                this.games.add(current);
-            }
-            else
+            current = new Game();
+            for(int j = 0; j < players.size(); j++)
             {
-                i--;
+                if(i != j)
+                {
+                    if(homeOrAway == 0)
+                    {
+                        current.setHomeTeam(players.get(i));
+                        current.setAwayTeam(players.get(j));
+                    }
+                    else
+                    {
+                        current.setHomeTeam(players.get(j));
+                        current.setAwayTeam(players.get(i));
+                    }
+                    players.get(i).addGames(current);
+                    players.get(j).addGames(current);
+                    games.add(current);
+                }
             }
         }
     }
@@ -130,7 +122,10 @@ public class Tournament{
             players.get(numPlayers - i - 1).addGames(current);
         }
     }
-
+    public Player getPlayer(int index)
+    {
+        return players.get(index);
+    }
     public void advanceNextRound()
     {
         List<Game> lastRound = new ArrayList<Game>();
@@ -142,7 +137,7 @@ public class Tournament{
         for(int i = 0; i < lastRound.size()/2; i++) {
             Game current = lastRound.get(i);
             Player advanceOne = current.getWinningPlayer();
-            current = lastRound.get(games.size() - i);
+            current = lastRound.get(lastRound.size() - 1 - i);
             Player advanceTwo = current.getWinningPlayer();
 
             current = new Game();
@@ -152,5 +147,11 @@ public class Tournament{
             games.add(current);
         }
     }
+
+    public Game getGame(int index)
+    {
+        return games.get(index);
+    }
+
 
 }
