@@ -77,8 +77,8 @@ public class MatchActivity extends AppCompatActivity {
     public void confirmScore(View v){
         Intent intent = new Intent();
 
-        game.setHomeTeamScore(homeTeamScore.getValue());
-        game.setAwayTeamScore(awayTeamScore.getValue());
+//        game.setHomeTeamScore(homeTeamScore.getValue());
+//        game.setAwayTeamScore(awayTeamScore.getValue());
 
         intent.putExtra("game",gson.toJson(this.game));
         setResult(200, intent);

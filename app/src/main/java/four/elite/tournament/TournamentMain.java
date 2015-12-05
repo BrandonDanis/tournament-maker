@@ -75,7 +75,7 @@ public class TournamentMain extends AppCompatActivity implements AdapterView.OnI
         Gson gson = new Gson();
 
         //Store anything in bundle here
-        intent.putExtra("game", gson.toJson(tournament.getNextGame()));
+//        intent.putExtra("game", gson.toJson(tournament.getNextGame()));
 
         this.startActivityForResult(intent, 200);
     }
