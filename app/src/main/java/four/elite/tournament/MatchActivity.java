@@ -66,7 +66,7 @@ public class MatchActivity extends AppCompatActivity {
         homeImage = (ImageView)findViewById(R.id.homeTeamImage);
         awayImage = (ImageView)findViewById(R.id.awayTeamImage);
         imageLoader.displayImage(game.getHomeTeam().getImageUrl(),homeImage);
-        imageLoader.displayImage(game.getHomeTeam().getImageUrl(),awayImage);
+        imageLoader.displayImage(game.getAwayTeam().getImageUrl(),awayImage);
 
     }
 
@@ -77,10 +77,9 @@ public class MatchActivity extends AppCompatActivity {
     public void confirmScore(View v){
         Intent intent = new Intent();
 
-//        game.setHomeTeamScore(homeTeamScore.getValue());
-//        game.setAwayTeamScore(awayTeamScore.getValue());
+        intent.putExtra("homeScore", homeTeamScore.getValue());
+        intent.putExtra("awayScore", awayTeamScore.getValue());
 
-        intent.putExtra("game",gson.toJson(this.game));
         setResult(200, intent);
         finish();
 

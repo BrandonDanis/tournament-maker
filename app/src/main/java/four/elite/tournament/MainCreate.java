@@ -122,22 +122,24 @@ public class MainCreate extends AppCompatActivity implements AdapterView.OnItemC
                     final Intent intent = new Intent();
                     Tournament newTournament;
 
+                    Gson gson = new Gson();
+
                     switch (item) {
                         case 0:
                             newTournament = new Tournament(tournamentName.getText().toString(),players,options[0].toString());
-                            intent.putExtra("tournament-object", new Gson().toJson(newTournament));
+                            intent.putExtra("tournament-object", gson.toJson(newTournament));
                             setResult(200, intent);
                             finish();
                             break;
                         case 1:
                             newTournament = new Tournament(tournamentName.getText().toString(),players,options[1].toString());
-                            intent.putExtra("tournament-object", new Gson().toJson(newTournament));
+                            intent.putExtra("tournament-object", gson.toJson(newTournament));
                             setResult(200, intent);
                             finish();
                             break;
                         case 2:
                             newTournament = new Tournament(tournamentName.getText().toString(),players,options[2].toString());
-                            intent.putExtra("tournament-object", new Gson().toJson(newTournament));
+                            intent.putExtra("tournament-object", gson.toJson(newTournament));
                             setResult(200, intent);
                             finish();
                             break;

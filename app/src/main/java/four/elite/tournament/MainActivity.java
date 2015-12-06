@@ -1,6 +1,7 @@
 package four.elite.tournament;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -23,7 +24,7 @@ import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
 
-    private List<Tournament> tournaments = new ArrayList<>();
+    private static List<Tournament> tournaments = new ArrayList<>();
 
     ListView listView;
 
@@ -48,7 +49,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         });
 
 
-
         if(tournaments != null)
             populateListView();
 
@@ -68,14 +68,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     private void populateListView(){
-        List<String> tournamentNames = new ArrayList<String>();
-        for(int i=0; i < tournaments.size(); i++){
-            Tournament tournament = tournaments.get(i);
-            tournamentNames.add(tournament.getName());
-        }
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
-                this, android.R.layout.simple_list_item_1, tournamentNames
-        );
+        TournamentLayoutArrayAdapter arrayAdapter = new TournamentLayoutArrayAdapter(getApplicationContext(),tournaments);
         listView.setAdapter(arrayAdapter);
         listView.setOnItemClickListener(this);
     }
@@ -124,6 +117,18 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 })
                 .setNegativeButton("No", null)
                 .show();
+    }
+
+    public static void updateTournaments(Context context,Tournament tournamentToUpdate){
+
+        for(int i = 0 ; i < tournaments.size(); i++){
+            if(tournaments.get(i).getName().equals(tournamentToUpdate.getName()))
+            {
+                tournaments.set(i, tournamentToUpdate);
+                DataManager.saveTournaments(context,tournaments);
+                return;
+            }
+        }
     }
 
 

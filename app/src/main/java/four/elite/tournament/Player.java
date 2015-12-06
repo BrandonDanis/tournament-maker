@@ -6,10 +6,7 @@ public class Player {
 
     private String teamName,playerName,imageUrl;
 
-    private int ranking,gamesPlayed,gamesWon, totalGoalsFor, totalGoalsAgainst;
-
-    private List <Game> games = new ArrayList<Game>();
-    private List<Player> otherPlayers = new ArrayList<Player>();
+    private int ranking,gamesPlayed, gamesWon, totalGoalsFor, totalGoalsAgainst;
 
     public Player(){}
 
@@ -17,6 +14,8 @@ public class Player {
         this.teamName = teamName;
         this.playerName = playerName;
         this.imageUrl = url;
+        this.gamesWon = 0;
+        this.gamesPlayed = 0;
         if(url == null){
             this.imageUrl = "http://dogr.io/doge.png";
         }
@@ -47,51 +46,8 @@ public class Player {
         return this.gamesWon;
     }
 
-    public void addGames(Game game)
-    {
-        games.add(game);
-    }
-    public void addOtherPlayer(Player other)
-    {
-        otherPlayers.add(other);
-    }
-
-
-    public Game getGame(int index)
-    {
-        return games.get(index);
-    }
     public int getRanking(){
         return this.ranking;
-    }
-
-    public boolean checkAlreadyPlaying(Player other)
-    {
-        for(int i = 0; i < otherPlayers.size(); i++)
-        {
-            if(other == otherPlayers.get(i))
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public Player getOtherPlayer(int index)
-    {
-        return otherPlayers.get(index);
-    }
-
-    public boolean alreadyPlayed (Player other)
-    {
-        for(int i = 0; i < otherPlayers.size(); i++)
-        {
-            if(otherPlayers.get(i).getTeamName() == other.getTeamName())
-            {
-                return true;
-            }
-        }
-        return false;
     }
 
     public void setName(String name){
@@ -106,12 +62,12 @@ public class Player {
         this.ranking = rank;
     }
 
-    public void setGamesWon(int wins){
-        this.gamesWon = wins;
+    public void incrementGamesWon(){
+        this.gamesWon++;
     }
 
-    public void setGamesPlayed(int games){
-        this.gamesPlayed = games;
+    public void incrementGamesPlayed(){
+        this.gamesPlayed++;
     }
 
     public void addGoalsFor(int goals)

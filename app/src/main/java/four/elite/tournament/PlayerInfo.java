@@ -58,7 +58,7 @@ public class PlayerInfo extends AppCompatActivity {
 
         //init image loader
         ImageLoader imageLoader = ImageLoader.getInstance();
-        System.out.println(imageURL);
+        System.out.print(imageURL);
         imageLoader.displayImage(imageURL, imageView);
 
 

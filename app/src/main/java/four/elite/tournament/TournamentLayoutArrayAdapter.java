@@ -19,7 +19,7 @@ public class TournamentLayoutArrayAdapter extends ArrayAdapter{
     List<Tournament> tournaments;
 
     public TournamentLayoutArrayAdapter(Context context, List<Tournament> tournaments) {
-        super(context, -1, tournaments.size());
+        super(context, -1, tournaments);
         this.context = context;
         this.tournaments = tournaments;
     }
@@ -37,7 +37,7 @@ public class TournamentLayoutArrayAdapter extends ArrayAdapter{
 
         tournamentName.setText(tournaments.get(position).getName());
         players.setText("Players: " + Integer.toString(tournaments.get(position).getPlayers().size()));
-        type.setText("Type: " + tournaments.getType());
+        type.setText("Type: " + tournaments.get(position).getType());
 
         return rowView;
 

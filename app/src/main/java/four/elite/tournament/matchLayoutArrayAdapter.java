@@ -19,10 +19,9 @@ public class MatchLayoutArrayAdapter extends ArrayAdapter{
     List<Game> matches;
 
     public MatchLayoutArrayAdapter(Context context, List<Game> matches) {
-        super(context, -1, matches.size());
+        super(context, -1, matches);
         this.context = context;
         this.matches = matches;
-
     }
 
     @Override
@@ -41,15 +40,15 @@ public class MatchLayoutArrayAdapter extends ArrayAdapter{
         ImageView homeImage = (ImageView)rowView.findViewById(R.id.homeTeamImage);
         ImageView awayImage = (ImageView)rowView.findViewById(R.id.awayTeamImage);
 
-        homeTeamScore.setText(matches.get(position).getHomeTeam().getTeamName());
-        awayTeamScore.setText(matches.get(position).getAwayTeam().getTeamName());
+        homeTeamScore.setText(Integer.toString(matches.get(position).getHomeTeamScore()));
+        awayTeamScore.setText(Integer.toString(matches.get(position).getAwayTeamScore()));
 
         homePlayerName.setText(matches.get(position).getHomeTeam().getName());
         awayPlayerName.setText(matches.get(position).getAwayTeam().getName());
 
 
         imageLoader.displayImage(matches.get(position).getHomeTeam().getImageUrl(), homeImage);
-        imageLoader.displayImage(matches.get(position).getAwayTeam().getImageUrl(),awayImage);
+        imageLoader.displayImage(matches.get(position).getAwayTeam().getImageUrl(), awayImage);
 
         return rowView;
 

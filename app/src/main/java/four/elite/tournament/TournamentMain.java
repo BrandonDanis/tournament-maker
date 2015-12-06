@@ -7,12 +7,13 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
 public class TournamentMain extends AppCompatActivity implements AdapterView.OnItemClickListener
 {
-    public static Tournament tournament;
+    public Tournament tournament;
 
     TextView tourneyNameLabel;
     ListView listView;
@@ -56,7 +57,6 @@ public class TournamentMain extends AppCompatActivity implements AdapterView.OnI
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
         Intent intent = new Intent(TournamentMain.this,PlayerInfo.class);
         intent.putExtra("Tournament Name", tournament.getName());
         intent.putExtra("Player Name", tournament.getPlayers().get(position).getName());
@@ -66,7 +66,6 @@ public class TournamentMain extends AppCompatActivity implements AdapterView.OnI
         intent.putExtra("Player Wins", tournament.getPlayers().get(position).getGamesWon());
         intent.putExtra("Image URL", tournament.getPlayers().get(position).getImageUrl());
         this.startActivity(intent);
-
     }
 
     public void viewingNextMatch(View v){
@@ -75,9 +74,18 @@ public class TournamentMain extends AppCompatActivity implements AdapterView.OnI
         Gson gson = new Gson();
 
         //Store anything in bundle here
-//        intent.putExtra("game", gson.toJson(tournament.getNextGame()));
 
-        this.startActivityForResult(intent, 200);
+        Game nextGame = tournament.getNextGame();
+
+        if(nextGame != null){
+            intent.putExtra("game", gson.toJson(nextGame));
+            this.startActivityForResult(intent, 200);
+        }else{
+            Toast toast = Toast.makeText(getApplicationContext(), "No more games!", Toast.LENGTH_LONG);
+            toast.show();
+        }
+
+
     }
 
     @Override
@@ -87,15 +95,23 @@ public class TournamentMain extends AppCompatActivity implements AdapterView.OnI
         //matchActivity result
         if(requestCode == 200 && resultCode == 200){
             //handle return values
-            Gson gson = new Gson();
-            String json = data.getStringExtra("game");
-            Game game = gson.fromJson(json, Game.class);
+            tournament.getNextGame().setHomeTeamScore(data.getIntExtra("homeScore", -1));
+            tournament.getNextGame().setAwayTeamScore(data.getIntExtra("awayScore", -1));
+            tournament.getNextGame().setPlayed(true);
+            tournament.updatePlayer();
+            tournament.sortRankings();
+            tournament.setRank();
+            populatePlayers();
+            System.out.println(tournament.getNextGame().getHomeTeam().getGamesPlayed());
 
-            //SET THIS GAME TO PLAYED IN TOURNAMENT
-            //NOT SAME GAME AS WHAT WE SENT
-            //THEREFORE YOU MUST FIND THE RIGHT GAME WITH SIMILAR
-            //VALUES AND REPLACE IT :)
 
+            MainActivity.updateTournaments(getApplicationContext(), tournament);
+
+            System.out.println(tournament.getNextGame().getHomeTeam().getGamesPlayed());
+            tournament.incrementGameCounter();
+
+
+            MainActivity.updateTournaments(getApplicationContext(), tournament);
         }
 
     }

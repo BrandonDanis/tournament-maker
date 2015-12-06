@@ -2,6 +2,7 @@ package four.elite.tournament;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Tournament{
@@ -24,18 +25,12 @@ public class Tournament{
         this.gameCounter = 0;
         maxGamesPerPlayer = players.size() - 1;
 
-        switch (tournamentFormat){
-            case "Round Robin":
-                this.setRoundRobinGames();
-                break;
-
-            case "Knockout":
-                this.setKnockOut();
-                break;
-
-            case "Round Robin & Knockout":
-                this.setRoundRobinGames();
-                break;
+        if(tournamentFormat.equals("Round Robin")){
+            setRoundRobinGames();
+        }else if(tournamentFormat.equals("Knockout")){
+            setKnockOut();
+        }else{
+            setRoundRobinGames();
         }
 
     }
@@ -75,24 +70,27 @@ public class Tournament{
                         current.setHomeTeam(players.get(j));
                         current.setAwayTeam(players.get(i));
                     }
-                    players.get(i).addGames(current);
-                    players.get(i).addOtherPlayer(players.get(j));
-                    players.get(j).addGames(current);
-                    players.get(j).addOtherPlayer(players.get(i));
+
                     games.add(current);
                 }
             }
 
         }
     }
-    public void sortRankings()
+    public void setRank()
     {
+        for(int i = 0 ; i < players.size();i++)
+        {
+            players.get(i).setRanking(i+1);
+        }
+    }
+    public void sortRankings(){
         Player temp;
         for(int i = 0; i < numberOfPlayers; i++)
         {
             for(int j = i; j < numberOfPlayers; j++)
             {
-                if(players.get(i).getRanking() > players.get(j).getRanking())
+                if(players.get(i).getGamesWon() < players.get(j).getGamesWon())
                 {
                     temp = players.get(i);
                     players.set(i, players.get(j));
@@ -140,8 +138,6 @@ public class Tournament{
             current.setHomeTeam(players.get(i));
             current.setAwayTeam(players.get(numPlayers - i - 1));
             games.add(current);
-            players.get(i).addGames(current);
-            players.get(numPlayers - i - 1).addGames(current);
         }
     }
 
@@ -198,10 +194,12 @@ public class Tournament{
         }
         return true;
     }
+
     public int numberOfGames()
     {
         return games.size();
     }
+
     public void setGamePlayed(int index)
     {
         games.get(index).setPlayed(true);
@@ -209,9 +207,11 @@ public class Tournament{
 
     public Game getNextGame()
     {
-        Game next = games.get(gameCounter);
-        gameCounter++;
-        return next;
+        if(gameCounter < games.size()) {
+            Game next = games.get(gameCounter);
+            return next;
+        }
+        return null;
     }
 
     public String getType()
@@ -219,5 +219,50 @@ public class Tournament{
         return tournamentFormat;
     }
 
+    public List<Game> getPlayerMatches (Player current)
+    {
+        List <Game> thisPlayersGame = new ArrayList<Game>();
+        for(int i = 0 ; i < games.size(); i++)
+        {
+            if(games.get(i).getHomeTeam().getName().equals(current.getName()) || games.get(i).getAwayTeam().getName().equals(current.getName()))
+            {
+                thisPlayersGame.add(games.get(i));
+            }
+        }
+        return thisPlayersGame;
+    }
 
+    public void updatePlayer() {
+        for(int i = 0; i < players.size(); i++) {
+            if(players.get(i).getName().equals(games.get(gameCounter).getHomeTeam().getName()) || players.get(i).getName().equals(games.get(gameCounter).getAwayTeam().getName()))
+            {
+                players.get(i).incrementGamesPlayed();
+                if(players.get(i).getName().equals(games.get(gameCounter).getHomeTeam().getName()))
+                {
+                    players.get(i).addGoalsFor(games.get(gameCounter).getHomeTeamScore());
+                    players.get(i).addGoalsAgainst(games.get(gameCounter).getAwayTeamScore());
+                }
+                if(players.get(i).getName().equals(games.get(gameCounter).getAwayTeam().getName()))
+                {
+                    players.get(i).addGoalsFor(games.get(gameCounter).getAwayTeamScore());
+                    players.get(i).addGoalsAgainst(games.get(gameCounter).getHomeTeamScore());
+                }
+            }
+            if(players.get(i).getName().equals(games.get(gameCounter).getWinningPlayer().getName()))
+            {
+                players.get(i).incrementGamesWon();
+            }
+        }
+
+    }
+
+
+    public int getGameCounter()
+    {
+        return gameCounter;
+    }
+    public void incrementGameCounter()
+    {
+        gameCounter++;
+    }
 }
