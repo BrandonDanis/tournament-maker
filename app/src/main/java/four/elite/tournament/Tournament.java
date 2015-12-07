@@ -3,6 +3,7 @@ package four.elite.tournament;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class Tournament{
@@ -82,50 +83,12 @@ public class Tournament{
         }
     }
     public void sortRankings(){
-        Player temp;
-        for(int i = 0; i < numberOfPlayers; i++)
-        {
-            for(int j = 0; j < numberOfPlayers; j++)
-            {
-                if(i != j){
-                    if(players.get(i).getGamesWon() < players.get(j).getGamesWon())
-                    {
-                        temp = players.get(i);
-                        players.set(i, players.get(j));
-                        players.set(j, temp);
-                    }
-                    else if (players.get(i).getRanking() == players.get(j).getRanking())
-                    {
-                        if(players.get(i).getTotalGoalsFor() > players.get(j).getTotalGoalsFor())
-                        {
-                            temp = players.get(i);
-                            players.set(i, players.get(j));
-                            players.set(j, temp);
-                        }
-                        else if(players.get(i).getTotalGoalsFor() == players.get(j).getTotalGoalsFor())
-                        {
-                            if(players.get(i).getTotalGoalsAgainst() < players.get(j).getTotalGoalsAgainst())
-                            {
-                                temp = players.get(i);
-                                players.set(i, players.get(j));
-                                players.set(j, temp);
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        Collections.sort(players);
     }
 
     public void setKnockOut()
     {
         setupKnockout(numberOfPlayers);
-    }
-
-    public void setKnockout(int numPlayers)
-    {
-        this.sortRankings();
-        setupKnockout(numPlayers);
     }
 
     private void setupKnockout(int numPlayers)
@@ -194,11 +157,6 @@ public class Tournament{
         return true;
     }
 
-    public int numberOfGames()
-    {
-        return games.size();
-    }
-
     public void setGamePlayed(int index)
     {
         games.get(index).setPlayed(true);
@@ -232,27 +190,22 @@ public class Tournament{
     }
 
     public void updatePlayer() {
-        for(int i = 0; i < players.size(); i++) {
-            if(players.get(i).getName().equals(games.get(gameCounter).getHomeTeam().getName()) || players.get(i).getName().equals(games.get(gameCounter).getAwayTeam().getName()))
-            {
-                players.get(i).incrementGamesPlayed();
-                if(players.get(i).getName().equals(games.get(gameCounter).getHomeTeam().getName()))
-                {
-                    players.get(i).addGoalsFor(games.get(gameCounter).getHomeTeamScore());
-                    players.get(i).addGoalsAgainst(games.get(gameCounter).getAwayTeamScore());
-                }
-                if(players.get(i).getName().equals(games.get(gameCounter).getAwayTeam().getName()))
-                {
-                    players.get(i).addGoalsFor(games.get(gameCounter).getAwayTeamScore());
-                    players.get(i).addGoalsAgainst(games.get(gameCounter).getHomeTeamScore());
-                }
-            }
-            if(players.get(i).getName().equals(games.get(gameCounter).getWinningPlayer().getName()))
-            {
-                players.get(i).incrementGamesWon();
-            }
-        }
+        int homeTeam = players.indexOf(games.get(gameCounter).getHomeTeam());
+        int awayTeam = players.indexOf(games.get(gameCounter).getAwayTeam());
+        System.out.println(players.contains(games.get(gameCounter).getHomeTeam()));
+        players.get(homeTeam).incrementGamesPlayed();
+        players.get(awayTeam).incrementGamesPlayed();
 
+        players.get(homeTeam).addGoalsFor(games.get(gameCounter).getHomeTeamScore());
+        players.get(awayTeam).addGoalsFor(games.get(gameCounter).getAwayTeamScore());
+
+        players.get(homeTeam).addGoalsAgainst(games.get(gameCounter).getAwayTeamScore());
+        players.get(awayTeam).addGoalsAgainst(games.get(gameCounter).getHomeTeamScore());
+
+        Player temp = games.get(gameCounter).getWinningPlayer();
+        if(temp != null){
+            players.get(players.indexOf(temp)).incrementGamesWon();
+        }
     }
 
     public boolean isCompleted(){

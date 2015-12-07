@@ -1,8 +1,9 @@
 package four.elite.tournament;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
-public class Player {
+public class Player implements Comparable<Player>{
 
     private String teamName,playerName,imageUrl;
 
@@ -22,9 +23,7 @@ public class Player {
 
     }
 
-    public String getName(){
-        return this.playerName;
-    }
+    public String getName(){return this.playerName;}
 
     public String getImageUrl(){
         return this.imageUrl;
@@ -74,6 +73,7 @@ public class Player {
     {
         totalGoalsFor += goals;
     }
+
     public void addGoalsAgainst(int goalsAgainst)
     {
         totalGoalsAgainst += goalsAgainst;
@@ -89,4 +89,37 @@ public class Player {
         return totalGoalsAgainst;
     }
 
+    public boolean equals(Object obj){
+        Player temp = (Player) obj;
+        if(this.teamName.equals(temp.getTeamName()) && this.playerName.equals(temp.getName()) && this.imageUrl.equals(temp.getImageUrl())){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public int compareTo(Player another) {
+        if (this.gamesWon > another.getGamesWon()) {
+            return -1;
+        } else if (this.gamesWon < another.getGamesWon()) {
+            return 1;
+        } else{
+            if (this.totalGoalsFor > another.getTotalGoalsFor()) {
+                return -1;
+            } else if (this.totalGoalsFor < another.getTotalGoalsAgainst()) {
+                return 1;
+            }
+            else{
+                if (this.totalGoalsAgainst < another.getTotalGoalsAgainst()) {
+                    return -1;
+                }
+                else if (this.totalGoalsAgainst < another.getTotalGoalsAgainst()) {
+                    return 1;
+                }
+                else{
+                    return 0;
+                }
+            }
+        }
+        }
 }

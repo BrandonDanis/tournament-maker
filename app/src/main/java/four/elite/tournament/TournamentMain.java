@@ -86,7 +86,14 @@ public class TournamentMain extends AppCompatActivity implements AdapterView.OnI
             intent.putExtra("game", gson.toJson(nextGame));
             this.startActivityForResult(intent, 200);
         }else{
-            if(tournament.getType() != "Round Robin" || tournament.getType() != "Knockout"){
+            if(tournament.getType().equals("Round Robin") || tournament.getType().equals("Knockout")){
+                tournament.Complete(true);
+
+                Intent intent1 = new Intent(TournamentMain.this, TournamentResults.class);
+                intent1.putExtra("winningPlayer", gson.toJson(tournament.getPlayer(0)));
+                intent.putExtra("matches", gson.toJson(tournament.getPlayedGames()));
+            }
+            else{
                 final AlertDialog numDlg;
                 final NumberPicker numPkr;
 
@@ -101,7 +108,6 @@ public class TournamentMain extends AppCompatActivity implements AdapterView.OnI
                 dialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        return;
                     }
                 });
                 dialogBuilder.setPositiveButton("Set", new DialogInterface.OnClickListener() {
@@ -127,10 +133,7 @@ public class TournamentMain extends AppCompatActivity implements AdapterView.OnI
 
             }
 
-            tournament.Complete(true);
 
-            Toast toast = Toast.makeText(getApplicationContext(), "No more games!", Toast.LENGTH_LONG);
-            toast.show();
         }
 
 

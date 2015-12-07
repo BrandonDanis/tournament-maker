@@ -39,16 +39,12 @@ public class Game {
     }
 
     public Player getWinningPlayer(){
-
-
         if(homeScore > awayScore){
             return homeTeam;
         }else if(awayScore > homeScore){
             return awayTeam;
         }
-        else {
-            return null;
-        }
+        return null;
     }
     
     public void setHomeTeamScore(int score)

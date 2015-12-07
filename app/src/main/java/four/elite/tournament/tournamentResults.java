@@ -32,7 +32,7 @@ public class TournamentResults extends AppCompatActivity {
         Bundle bundle = intent.getExtras();
 
         gson = new Gson();
-
+        
         playerImage = (ImageView)findViewById(R.id.imageView);
         playerName = (TextView)findViewById(R.id.playerName);
         teamName = (TextView)findViewById(R.id.teamName);
