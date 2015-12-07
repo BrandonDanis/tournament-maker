@@ -1,15 +1,20 @@
 package four.elite.tournament;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+
+import java.util.List;
 
 public class TournamentMain extends AppCompatActivity implements AdapterView.OnItemClickListener
 {
@@ -81,6 +86,49 @@ public class TournamentMain extends AppCompatActivity implements AdapterView.OnI
             intent.putExtra("game", gson.toJson(nextGame));
             this.startActivityForResult(intent, 200);
         }else{
+            if(tournament.getType() != "Round Robin" || tournament.getType() != "Knockout"){
+                final AlertDialog numDlg;
+                final NumberPicker numPkr;
+
+                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+                numPkr = new NumberPicker(dialogBuilder.getContext());
+
+                numPkr.setMinValue(0);
+                numPkr.setMaxValue(tournament.getPlayers().size());
+
+                dialogBuilder.setTitle("Player in Knockout Stage");
+                dialogBuilder.setView(numPkr);
+                dialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        return;
+                    }
+                });
+                dialogBuilder.setPositiveButton("Set", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        int numProceeding = numPkr.getValue();
+
+                        tournament.sortRankings();
+
+                        while(tournament.getPlayers().size() > numProceeding){
+                            tournament.getPlayers().remove(tournament.getPlayers().size() - 1);
+                        }
+                        tournament = new Tournament(tournament.getName(), tournament.getPlayers(), "Knockout");
+
+                        MainActivity.updateTournaments(getApplicationContext(), tournament);
+
+                        populatePlayers();
+                    }
+                });
+                numDlg = dialogBuilder.create();
+                numDlg.show();
+
+            }
+
+            tournament.Complete(true);
+
             Toast toast = Toast.makeText(getApplicationContext(), "No more games!", Toast.LENGTH_LONG);
             toast.show();
         }

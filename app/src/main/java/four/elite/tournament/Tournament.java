@@ -9,12 +9,10 @@ public class Tournament{
 
     private List<Player> players = new ArrayList<Player>();
     private List<Game> games = new ArrayList<Game>();
-    private boolean played = false;
+    private boolean completed = false;
     private int gameCounter;
     private int numberOfPlayers;
     private String name;
-    private int maxGamesPerPlayer;
-    private final int maxNumberofPlayers = 16;
     private String tournamentFormat;
 
     public Tournament(String name, List<Player> players, String tournamentFormat) {
@@ -23,7 +21,6 @@ public class Tournament{
         this.numberOfPlayers = players.size();
         this.name = name;
         this.gameCounter = 0;
-        maxGamesPerPlayer = players.size() - 1;
 
         if(tournamentFormat.equals("Round Robin")){
             setRoundRobinGames();
@@ -88,29 +85,31 @@ public class Tournament{
         Player temp;
         for(int i = 0; i < numberOfPlayers; i++)
         {
-            for(int j = i; j < numberOfPlayers; j++)
+            for(int j = 0; j < numberOfPlayers; j++)
             {
-                if(players.get(i).getGamesWon() < players.get(j).getGamesWon())
-                {
-                    temp = players.get(i);
-                    players.set(i, players.get(j));
-                    players.set(j, temp);
-                }
-                else if (players.get(i).getRanking() == players.get(j).getRanking())
-                {
-                    if(players.get(i).getTotalGoalsFor() > players.get(j).getTotalGoalsFor())
+                if(i != j){
+                    if(players.get(i).getGamesWon() < players.get(j).getGamesWon())
                     {
                         temp = players.get(i);
                         players.set(i, players.get(j));
                         players.set(j, temp);
                     }
-                    else if(players.get(i).getTotalGoalsFor() == players.get(j).getTotalGoalsFor())
+                    else if (players.get(i).getRanking() == players.get(j).getRanking())
                     {
-                        if(players.get(i).getTotalGoalsAgainst() < players.get(j).getTotalGoalsAgainst())
+                        if(players.get(i).getTotalGoalsFor() > players.get(j).getTotalGoalsFor())
                         {
                             temp = players.get(i);
                             players.set(i, players.get(j));
                             players.set(j, temp);
+                        }
+                        else if(players.get(i).getTotalGoalsFor() == players.get(j).getTotalGoalsFor())
+                        {
+                            if(players.get(i).getTotalGoalsAgainst() < players.get(j).getTotalGoalsAgainst())
+                            {
+                                temp = players.get(i);
+                                players.set(i, players.get(j));
+                                players.set(j, temp);
+                            }
                         }
                     }
                 }
@@ -256,6 +255,12 @@ public class Tournament{
 
     }
 
+    public boolean isCompleted(){
+        return completed;
+    }
+    public void Complete(boolean bool){
+        completed = bool;
+    }
 
     public int getGameCounter()
     {

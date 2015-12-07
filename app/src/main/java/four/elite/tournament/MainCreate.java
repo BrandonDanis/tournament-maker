@@ -132,10 +132,17 @@ public class MainCreate extends AppCompatActivity implements AdapterView.OnItemC
                             finish();
                             break;
                         case 1:
-                            newTournament = new Tournament(tournamentName.getText().toString(),players,options[1].toString());
-                            intent.putExtra("tournament-object", gson.toJson(newTournament));
-                            setResult(200, intent);
-                            finish();
+                            if((players.size() & players.size()-1) != 0){
+                                Toast toast = Toast.makeText(getApplicationContext(), "Number of Players Must be a Power of 2", Toast.LENGTH_LONG);
+                                toast.show();
+
+                            }
+                            else {
+                                newTournament = new Tournament(tournamentName.getText().toString(), players, options[1].toString());
+                                intent.putExtra("tournament-object", gson.toJson(newTournament));
+                                setResult(200, intent);
+                                finish();
+                            }
                             break;
                         case 2:
                             newTournament = new Tournament(tournamentName.getText().toString(),players,options[2].toString());
