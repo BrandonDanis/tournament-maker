@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/Tournament Maker.iml" filepath="$PROJECT_DIR$/Tournament Maker.iml" />
+=======
+      <module fileurl="file://$PROJECT_DIR$/Tournament.iml" filepath="$PROJECT_DIR$/Tournament.iml" />
+>>>>>>> 885321fa0e4b26f136cd9f714cf24030eddce821
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
