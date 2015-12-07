@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.NumberPicker;
 import android.widget.TextView;
@@ -23,6 +24,8 @@ public class TournamentMain extends AppCompatActivity implements AdapterView.OnI
     TextView tourneyNameLabel;
     ListView listView;
 
+    Button nextMatch;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +39,11 @@ public class TournamentMain extends AppCompatActivity implements AdapterView.OnI
 
         tournament = DataManager.getTournamentByName(getApplicationContext(),bundle.getString("Tournament Name"));
         tourneyNameLabel.setText(tournament.getName());
+
+        if(tournament.isCompleted()){
+            nextMatch = (Button)findViewById(R.id.nextMatch);
+            nextMatch.setText("Results");
+        }
 
         populatePlayers();
     }
@@ -87,11 +95,12 @@ public class TournamentMain extends AppCompatActivity implements AdapterView.OnI
             this.startActivityForResult(intent, 200);
         }else{
             if(tournament.getType().equals("Round Robin") || tournament.getType().equals("Knockout")){
-                tournament.Complete(true);
+                tournament.complete(true);
 
-                Intent intent1 = new Intent(TournamentMain.this, TournamentResults.class);
-                intent1.putExtra("winningPlayer", gson.toJson(tournament.getPlayer(0)));
-                intent.putExtra("matches", gson.toJson(tournament.getPlayedGames()));
+                Intent tourneyResultIntent = new Intent(TournamentMain.this, TournamentResults.class);
+                tourneyResultIntent.putExtra("winningPlayer", gson.toJson(tournament.getPlayer(0)));
+                tourneyResultIntent.putExtra("matches", gson.toJson(tournament.getPlayedGames()));
+                startActivity(tourneyResultIntent);
             }
             else{
                 final AlertDialog numDlg;

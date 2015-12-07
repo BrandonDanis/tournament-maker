@@ -211,7 +211,7 @@ public class Tournament{
     public boolean isCompleted(){
         return completed;
     }
-    public void Complete(boolean bool){
+    public void complete(boolean bool){
         completed = bool;
     }
 
